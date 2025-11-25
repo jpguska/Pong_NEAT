@@ -24,7 +24,7 @@ O treinamento foi realizado simulando gerações de partidas aceleradas e sem re
 * **População:** Possui 50 indivíduos por geração.
 * **Função de Fitness:** É baseada na pontuação acumulada (Pontuação_Jogador 1 - Pontuação_Jogador 2) e na sobrevivência.
 
-## 📂 Estrutura dos Arquivos
+## Estrutura dos Arquivos
 
 * `bot.py`: **[Arquivo Principal]** Contém a classe `BotPlayer` que carrega a IA treinada e implementa a interface `act/observe` para a competição.
 * `melhor_ia_neat.pkl`: O arquivo binário contendo o genoma da melhor IA treinada.
@@ -33,7 +33,7 @@ O treinamento foi realizado simulando gerações de partidas aceleradas e sem re
 * `rodar_campeao.py`: Script auxiliar para visualizar a IA jogando graficamente.
 * `envpong.py`: Ambiente de simulação do jogo.
 
-## 🚀 Como Executar
+## Executar os Arquivos
 
 ### Pré-requisitos
 A solução foi desenvolvida em Python 3. As dependências necessárias estão listadas abaixo:
