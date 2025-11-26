@@ -6,9 +6,8 @@ import numpy as np
 import threading
 import time
 from envpong import PongGUIEnv, PongLogic
-from bot import BotRight  # Usaremos o BotRight como oponente para teste
+from bot import BotRight
 
-# Classe Wrapper para jogar com a rede NEAT salva
 class BotNEAT:
     def __init__(self, genome, config):
         self.genome = genome
@@ -24,7 +23,7 @@ class BotNEAT:
         if self.obs is None:
             return 0
             
-        # A rede recebe os inputs e cospe 3 valores de ativação
+        # A rede recebe os inputs e manda 3 valores de ativação
         output = self.net.activate(self.obs)
         
         # Lógica: O maior valor vence.
@@ -50,13 +49,12 @@ def runLoop(env, bot_p1, bot_p2):
         bot_p2.observe(obs)
         
         # Sincronia visual: espera o tempo de um frame (dt)
-        # Se quiser ver super rápido, diminua ou remova este sleep
         time.sleep(env.game.dt)
 
 def main():
     local_dir = os.path.dirname(__file__)
     
-    # 1. Carregar Configurações
+    # Carrega as Configurações
     config_path = os.path.join(local_dir, 'config-feedforward.txt')
     genome_path = os.path.join(local_dir, 'melhor_ia_neat.pkl')
 
@@ -69,14 +67,14 @@ def main():
                          neat.DefaultSpeciesSet, neat.DefaultStagnation,
                          config_path)
 
-    # 2. Carregar o Cérebro (Genoma)
+    # Carregar o Genoma
     with open(genome_path, "rb") as f:
         genome = pickle.load(f)
 
-    # 3. Inicializar Jogo
+    # Inicializa o Jogo
     env = PongGUIEnv() # Janela do Arcade
     
-    # Player 1 é a nossa IA, Player 2 é o Bot Aleatório (Sparring)
+    # Player 1 é a IA, Player 2 é o Bot
     player_ia = BotNEAT(genome, config)
     opponent = BotRight(env)
 
@@ -85,12 +83,12 @@ def main():
     player_ia.observe(obs)
     opponent.observe(obs)
     
-    # Inicia a thread de lógica (Game Loop)
+    # Inicia o Loop
     t = threading.Thread(target=runLoop, args=(env, player_ia, opponent))
     t.daemon = True # Fecha a thread se a janela fechar
     t.start()
     
-    # Inicia a thread de interface gráfica (Arcade)
+    # Inicia a interface gráfica
     arcade.run()
 
 if __name__ == "__main__":
