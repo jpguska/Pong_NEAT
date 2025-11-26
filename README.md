@@ -40,3 +40,12 @@ A solução foi desenvolvida em Python 3. As dependências necessárias estão l
 
 ```bash
 pip install neat-python numpy arcade gym shimmy
+```
+### Usando
+
+```liga o ambiente virtual
+source venv/bin/activate
+```
+```bash
+python3 treino_neat.py
+```
